@@ -1,6 +1,5 @@
 package com.escuelaing.edu.co.proyectoIntegrador.service.users;
 
-import com.escuelaing.edu.co.proyectoIntegrador.exceptions.UserNotFoundException;
 import com.escuelaing.edu.co.proyectoIntegrador.repository.User;
 import com.escuelaing.edu.co.proyectoIntegrador.repository.UserDto;
 import org.springframework.stereotype.Service;
@@ -39,6 +38,6 @@ public class UserServices implements IUserService{
 
     @Override
     public Optional<User> findById(String id) {
-        return Optional.of(users.get(id));
+        return Optional.ofNullable(users.get(id));
     }
 }
