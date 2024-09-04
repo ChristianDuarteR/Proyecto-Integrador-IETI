@@ -40,4 +40,9 @@ public class UserServices implements IUserService{
     public Optional<User> findById(String id) {
         return Optional.ofNullable(users.get(id));
     }
+
+    @Override
+    public void delete(String id){
+        users.remove(id);
+    }
 }

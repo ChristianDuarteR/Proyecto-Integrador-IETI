@@ -16,4 +16,6 @@ public interface IUserService {
     void update(User user, UserDto userDto) throws UserNotFoundException;
 
     Optional<User> findById(String id);
+
+    void delete(String id);
 }
