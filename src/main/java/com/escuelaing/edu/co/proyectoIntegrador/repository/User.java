@@ -8,7 +8,7 @@ import java.util.Date;
 public class User {
 
     @Getter
-    private final String id;
+    private String id;
 
     @Getter
     private final Date createdAt;
@@ -41,5 +41,9 @@ public class User {
         this.email = userDto.getEmail();
         this.createdAt = new Date();
 
+    }
+
+    public void setId(int id) {
+        this.id = String.valueOf(id);
     }
 }

@@ -2,6 +2,7 @@ package com.escuelaing.edu.co.proyectoIntegrador.service.users;
 
 import com.escuelaing.edu.co.proyectoIntegrador.exceptions.UserNotFoundException;
 import com.escuelaing.edu.co.proyectoIntegrador.repository.User;
+import com.escuelaing.edu.co.proyectoIntegrador.repository.UserDto;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,22 +19,22 @@ public class UserServices implements IUserService{
 
     @Override
     public void save(User user) {
-        users.put(user.getId(), user);
+        try {
+            user.setId(users.size() + 1);
+            if (users.containsKey(user.getId())) {
+                throw new IllegalArgumentException("El Id del usuario ya está en uso: " + user.getId());
+            }
+            users.put(user.getId(), user);
+        } catch (Exception e) {
+            System.err.println("Error al guardar el usuario: " + e.getCause());
+        }
     }
 
     @Override
-    public void update(User user, String id) {
-        try {
-            User optionalUser = users.get(id);
-            if (optionalUser == null) throw new UserNotFoundException(id);
-            else {
-                optionalUser.setName(user.getName());
-                optionalUser.setLastName(user.getLastName());
-                optionalUser.setEmail(user.getEmail());
-            }
-        } catch (UserNotFoundException e){
-            e.getCause();
-        }
+    public void update(User user, UserDto userDto) {
+        user.setName(userDto.getName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
     }
 
     @Override

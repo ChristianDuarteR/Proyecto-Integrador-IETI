@@ -13,7 +13,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-@RestController("/users")
+@RestController
+@RequestMapping("/v1/users")
+
 public class UserController {
 
     private final IUserService userServices;
@@ -37,12 +39,13 @@ public class UserController {
         return ResponseEntity.created(createdUserUri).body(user);
     }
 
-    @PutMapping({"{id}"})
-    public ResponseEntity<User> updateUser(@PathVariable String id) throws UserNotFoundException {
-        Optional<User> optionalUser =  userServices.findById(id);
+    @PutMapping("{id}")
+    public ResponseEntity<User> updateUser(@PathVariable String id,
+                                           @RequestBody UserDto userDto) throws UserNotFoundException {
+        Optional<User> optionalUser = userServices.findById(id);
         if (optionalUser.isPresent()){
             User user = optionalUser.get();
-            userServices.update(user,id);
+            userServices.update(user, userDto);
             userServices.save(user);
             return ResponseEntity.ok(user);
         }else {
