@@ -1,7 +1,9 @@
 package com.escuelaing.edu.co.proyectoIntegrador.service.users;
 
-import com.escuelaing.edu.co.proyectoIntegrador.repository.User;
-import com.escuelaing.edu.co.proyectoIntegrador.repository.UserDto;
+import com.escuelaing.edu.co.proyectoIntegrador.model.User;
+import com.escuelaing.edu.co.proyectoIntegrador.model.UserDto;
+import com.escuelaing.edu.co.proyectoIntegrador.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -9,23 +11,21 @@ import java.util.*;
 @Service
 public class UserServices implements IUserService{
 
-    private final Map<String, User> users = new HashMap<>();
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<User> all() {
-        return new ArrayList<>(users.values());
+        return userRepository.findAll();
     }
 
     @Override
     public void save(User user) {
         try {
-            user.setId(users.size() + 1);
-            if (users.containsKey(user.getId())) {
-                throw new IllegalArgumentException("El Id del usuario ya está en uso: " + user.getId());
-            }
-            users.put(user.getId(), user);
+            userRepository.save(user);
         } catch (Exception e) {
             System.err.println("Error al guardar el usuario: " + e.getCause());
+            e.printStackTrace();
         }
     }
 
@@ -34,15 +34,16 @@ public class UserServices implements IUserService{
         user.setName(userDto.getName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
+
     }
 
     @Override
     public Optional<User> findById(String id) {
-        return Optional.ofNullable(users.get(id));
+        return userRepository.findById(id);
     }
 
     @Override
     public void delete(String id){
-        users.remove(id);
+        userRepository.deleteById(id);
     }
 }

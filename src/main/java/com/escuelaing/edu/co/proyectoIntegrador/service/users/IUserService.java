@@ -1,8 +1,8 @@
 package com.escuelaing.edu.co.proyectoIntegrador.service.users;
 
 import com.escuelaing.edu.co.proyectoIntegrador.exceptions.UserNotFoundException;
-import com.escuelaing.edu.co.proyectoIntegrador.repository.User;
-import com.escuelaing.edu.co.proyectoIntegrador.repository.UserDto;
+import com.escuelaing.edu.co.proyectoIntegrador.model.User;
+import com.escuelaing.edu.co.proyectoIntegrador.model.UserDto;
 
 import java.util.List;
 import java.util.Optional;

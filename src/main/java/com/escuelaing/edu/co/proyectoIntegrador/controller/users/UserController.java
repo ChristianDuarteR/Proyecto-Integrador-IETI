@@ -2,9 +2,9 @@ package com.escuelaing.edu.co.proyectoIntegrador.controller.users;
 
 
 import com.escuelaing.edu.co.proyectoIntegrador.exceptions.UserNotFoundException;
-import com.escuelaing.edu.co.proyectoIntegrador.repository.UserDto;
+import com.escuelaing.edu.co.proyectoIntegrador.model.UserDto;
 import com.escuelaing.edu.co.proyectoIntegrador.service.users.IUserService;
-import com.escuelaing.edu.co.proyectoIntegrador.repository.User;
+import com.escuelaing.edu.co.proyectoIntegrador.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
