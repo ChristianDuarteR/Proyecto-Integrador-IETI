@@ -18,4 +18,6 @@ public interface IUserService {
     Optional<User> findById(String id);
 
     void delete(String id);
+
+    Optional<User> findByEmail(String username);
 }
